@@ -29,13 +29,13 @@ toponym = response.json()["response"]["GeoObjectCollection"]["featureMember"][0]
 # Координаты центра топонима:
 ll = toponym["Point"]["pos"]
 # Долгота и широта:
-toponym_longitude, toponym_lattitude = ll.split(" ")
+toponym_len, toponym_wid = ll.split(" ")
 
-deltaLongtitude, deltaLatitude = spn(toponym)
+lenn, wid = spn(toponym)
 map_params = {
-    "ll": ",".join([toponym_longitude, toponym_lattitude]),
-    "spn": ",".join(str(i) for i in [deltaLongtitude, deltaLatitude]),
-    "l": "map", "pt": ",".join([toponym_longitude, toponym_lattitude])
+    "ll": ",".join([toponym_len, toponym_wid]),
+    "spn": ",".join(str(i) for i in [lenn, wid]),
+    "l": "map", "pt": ",".join([toponym_len, toponym_wid])
 }
 response = requests.get("http://geocode-maps.yandex.ru/1.x/", params=geocoder_params)
 Image.open(BytesIO(response.content)).show()
